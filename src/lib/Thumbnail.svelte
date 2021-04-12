@@ -1,6 +1,6 @@
 <div class="root">
 	{#each [...new Array(7)] as v, i}
-		<div id={`thumbnail-${6 - i}`} style={`--url: url("thumbnail-${6 - i}.png")`} />
+		<div id={`thumbnail-${6 - i}`} style={`--url: url("/thumbnail-${6 - i}.png")`} />
 	{/each}
 </div>
 
