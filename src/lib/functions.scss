@@ -2,8 +2,23 @@
 * Returns the pixels devided by the root element height in rems.
 */
 @function get-rem($pixels) {
-  $rem-size: $pixels / 16px;
-  @return #{$rem-size}rem;
+  @return #{$pixels / 16}rem;
+}
+
+/**
+* Returns the pixels devided by the root element height in ems.
+*/
+@function get-em($pixels) {
+  $rem-size: $pixels / 16;
+  @return #{$rem-size}em;
+}
+
+@function strip-unit($number) {
+  @if type-of($number) == 'number' and not unitless($number) {
+    @return $number / ($number * 0 + 1);
+  }
+
+  @return $number;
 }
 
 /**

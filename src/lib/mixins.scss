@@ -1,0 +1,138 @@
+@import "./functions.scss";
+
+@mixin letter-spacing {
+  letter-spacing: calc(-1.5 / var(--text-7xl) * 1em);
+}
+
+$spec: (
+  "headline1": (
+     "weight": 250,
+     "size": 96,
+     "case": "none",
+     "tracking": -1.5,
+     "leading": 112
+  ),
+  "headline2": (
+     "weight": 300,
+     "size": 60,
+     "case": "none",
+     "tracking": -0.5,
+     "leading": 72
+  ),
+  "headline3": (
+     "weight": 400,
+     "size": 48,
+     "case": "none",
+     "tracking": 0,
+     "leading": 56
+  ),
+  "headline4": (
+     "weight": 400,
+     "size": 34,
+     "case": "none",
+     "tracking": 0.25,
+     "leading": 40
+  ),
+  "headline5": (
+     "weight": 400,
+     "size": 24,
+     "case": "none",
+     "tracking": 0,
+     "leading": 28
+  ),
+  "headline6": (
+     "weight": 500,
+     "size": 20,
+     "case": "none",
+     "tracking": 0.15,
+     "leading": 24
+  ),
+  "subtitle1": (
+     "weight": 400,
+     "size": 16,
+     "case": "none",
+     "tracking": 0.15,
+     "leading": 24
+  ),
+  "subtitle2": (
+     "weight": 500,
+     "size": 14,
+     "case": "none",
+     "tracking": 0.1,
+     "leading": 28
+  ),
+  "body1": (
+     "weight": 400,
+     "size": 16,
+     "case": "none",
+     "tracking": 0.5,
+     "leading": 20
+  ),
+  "body2": (
+     "weight": 400,
+     "size": 14,
+     "case": "none",
+     "tracking": 0.25,
+     "leading": 24
+  ),
+  "button": (
+     "weight": 500,
+     "size": 14,
+     "case": "uppercase",
+     "tracking": 1.25,
+     "leading": 16
+  ),
+  "caption": (
+     "weight": 400,
+     "size": 12,
+     "case": "none",
+     "tracking": 0.4,
+     "leading": 16
+  ),
+  "overline": (
+     "weight": 400,
+     "size": 10,
+     "case": "uppercase",
+     "tracking": 1.5,
+     "leading": 16
+  )
+);
+
+@mixin typography($variant, $leading: null) {
+  // get spec
+  $weight: map-get(map-get($spec, $variant), "weight");
+  $size: map-get(map-get($spec, $variant), "size");
+  $case: map-get(map-get($spec, $variant), "case");
+  $tracking: map-get(map-get($spec, $variant), "tracking");
+  $lh: map-get(map-get($spec, $variant), "leading");
+  @if $leading != null {
+    $lh: $leading;
+  }
+
+  $hl: $lh / 2;
+  margin-bottom: -#{get-rem($hl)};
+  line-height: get-rem($lh);
+  font-size: get-rem($size);
+  letter-spacing: #{$tracking / $size}em;
+  @if ($case != "none") {
+    text-transform: #{$case};
+  }
+
+  &::before {
+    display: inline-block;
+    height: get-rem($lh);
+    content: '';
+  }
+
+  &::after {
+    display: inline-block;
+    vertical-align: -#{get-rem($hl)};
+    content: '';
+  }
+}
+
+@mixin fill-parent {
+   position: absolute;
+   @apply inset-0;
+   content: '';
+}

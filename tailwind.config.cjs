@@ -3,6 +3,7 @@ module.exports = {
     enabled: true,
     content: [
       './src/**/*.html',
+      './src/**/*.svelte',
       './src/**/*.js',
       './src/**/*.cjs',
       './src/**/*.scss',
