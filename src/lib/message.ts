@@ -25,7 +25,10 @@ const messages = {
   }
 }
 
+
 export type supported = keyof typeof messages;
+export const languages = Object.keys(messages) as supported[];
+export const defaultLang: supported = "en";
 export type messageKey = keyof typeof messages.en;
 
 export function t(key: messageKey, tag: supported): string {
