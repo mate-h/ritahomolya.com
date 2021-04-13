@@ -11,6 +11,13 @@
   src: url("Inter.var.woff2?v=3.18") format("woff2");
 }
 
+@font-face {
+  font-family: "SF Symbols";
+  font-weight: 500;
+  font-style: normal;
+  src: url("/fonts/SFSymbols-Medium.woff2") format("woff2");
+}
+
 :root {
 	font-family: Inter, system-ui, sans-serif;
 }
