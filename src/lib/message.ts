@@ -4,14 +4,24 @@ const messages = {
     'index.footer': 'Made with ❤️ in Canada',
     'lang.en': 'English',
     'lang.hu': 'Hungarian',
-    'index.contact': 'Contact'
+    'lang.it': 'Italian',
+    'index.contact': 'Contact',
   },
   hu: {
     'index.overline': 'Grafikai Tervezés • Animáció Készítés',
     'index.footer': '❤️ Szeretettel készült Kanadában',
     'lang.en': 'Angol',
     'lang.hu': 'Magyar',
+    'lang.it': 'Olasz',
     'index.contact': 'Kapcsolat'
+  },
+  it: {
+    'index.overline': 'Progettazione grafica • Animazioni',
+    'index.footer': 'Realizzato con ❤️ in Canada',
+    'lang.en': 'Inglese',
+    'lang.hu': 'Ungherese',
+    'lang.it': 'Italiano',
+    'index.contact': 'Contatto'
   }
 }
 

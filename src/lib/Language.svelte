@@ -21,6 +21,11 @@
 			icon: '🇭🇺',
 			key: 'lang.hu',
 			lang: 'hu'
+		},
+		{
+			icon: '🇮🇹',
+			key: 'lang.it',
+			lang: 'it'
 		}
 	];
 </script>
