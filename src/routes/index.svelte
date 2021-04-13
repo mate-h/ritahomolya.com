@@ -2,20 +2,24 @@
 	import rounded from '$lib/rounded';
 	import Button from '$lib/Button.svelte';
 	import Thumbnail from '$lib/Thumbnail.svelte';
+	import Language from '$lib/Language.svelte';
+	import { t } from '$lib/message';
+	import { language } from '$lib/stores';
 </script>
 
 <main class="container mx-auto">
 	<div use:rounded class="edge" />
 	<div use:rounded={{ radius: 30 }} class="edge-1" />
-	<div class="overline">Graphic Design • Motion Graphic Design</div>
+	<div class="overline">{t('index.overline', $language)}</div>
 	<h1>Rita Homolya</h1>
 	<Thumbnail />
 	<div class="mask" />
-	<Button class="mt-6">Contact</Button>
+	<Button class="mt-6">{t('index.contact', $language)}</Button>
 	<footer>
-		Made with {'<3'} in Canada,
+		<Language />
+		{t('index.footer', $language)}{' — '}
 		<a href="https://github.com/mate-h/ritahomolya.com" target="_blank" rel="noopener noreferrer"
-			>contribute here</a
+			>GitHub</a
 		>
 	</footer>
 	<div class="dotgrid" />

@@ -1,6 +1,6 @@
 export const generateId = () => Math.random().toString(36).substr(2, 9);
 
-export default (node: any, props: any) => {
+export default (node: HTMLElement, props?: any): ReturnType<Action> => {
   function defaults(p) {
     return {
       radius: 32,
@@ -13,41 +13,6 @@ export default (node: any, props: any) => {
     const w = node.clientWidth;
     const h = node.clientHeight;
     if (w === 0 || h === 0) return "";
-
-    const d = [
-      0.5,
-      0.7190972222,
-      0.8408963542,
-      0.9204482639,
-      0.9204482639,
-      0.8408963542,
-      0.7190972222,
-      0.5,
-      0.5,
-      0.2809027778,
-      0.1591036458,
-      0.9204482639,
-      0.07955173611,
-      0.8408963542,
-      0.7190972222,
-      0.5,
-      0.5,
-      0.2809027778,
-      0.1591036458,
-      0.07955173611,
-      0.07955173611,
-      0.1591036458,
-      0.2809027778,
-      0.5,
-      0.5,
-      0.7190972222,
-      0.8408963542,
-      0.07955173611,
-      0.9204482639,
-      0.1591036458,
-      0.2809027778,
-      0.5,
-    ];
     const xs = 1 - (w - cornerRadius) / w;
     const ys = 1 - (h - cornerRadius) / h;
     const gx = (val) => 1 - (1 - val) * xs; // approach 1

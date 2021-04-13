@@ -136,3 +136,57 @@ $spec: (
    @apply inset-0;
    content: '';
 }
+
+@mixin rtl($property, $ltr-value, $rtl-value) {
+   #{$property}: $ltr-value;
+ 
+   [dir=rtl] & {
+     #{$property}: $rtl-value;
+   }
+ }
+
+@mixin active ($type: "dark", $selector: "::before") {
+   &#{$selector} {
+      transition: background-color 75ms linear;
+      @if ($selector == "::after" or $selector == "::before") {
+         @include fill-parent;
+      }
+   }
+   @if ($type == "dark") {
+      // hover-dark: 0.08;
+      // focus-dark: 0.24;
+      // pressed-dark: 0.32;
+      // selected-dark: 0.16;
+      &.selected#{$selector} {
+         background-color: rgba(255, 255, 255, 0.16);
+      }
+      &:hover#{$selector} {
+         background-color: rgba(255, 255, 255, 0.08);
+      }
+      &:focus#{$selector} {
+         background-color: rgba(255, 255, 255, 0.24);
+      }
+      &:active#{$selector} {
+         background-color: rgba(255, 255, 255, 0.32);
+      }
+   }
+   @else {
+      // hover-light: 0.04;
+      // focus-light: 0.12;
+      // pressed-light: 0.16;
+      // selected-light: 0.08;
+      &.selected#{$selector} {
+         background-color: rgba(0, 0, 0, 0.08);
+      }
+      &:hover#{$selector} {
+         background-color: rgb(0, 0, 0, 0.04);
+      }
+      &:focus#{$selector} {
+         background-color: rgba(0, 0, 0, 0.12);
+      }
+      &:active#{$selector} {
+         background-color: rgba(0, 0, 0, 0.16);
+      }
+   }
+   
+}
