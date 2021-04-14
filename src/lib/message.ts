@@ -9,6 +9,9 @@ const messages = {
     'index.email': 'Email',
     'index.phone': 'Phone',
     'index.message': 'Message',
+    'index.send': 'Send',
+    'index.name': 'Name',
+    'index.send-message': 'Send a message',
   },
   hu: {
     'index.overline': 'Grafikai Tervezés • Animáció Készítés',
@@ -20,6 +23,9 @@ const messages = {
     'index.email': 'E-mail',
     'index.phone': 'Telefon',
     'index.message': 'Üzenet',
+    'index.send': 'Küldés',
+    'index.name': 'Név',
+    'index.send-message': 'Üzenet küldése',
   },
   it: {
     'index.overline': 'Progettazione grafica • Animazioni',
@@ -31,6 +37,9 @@ const messages = {
     'index.email': 'Email',
     'index.phone': 'Telefono',
     'index.message': 'Messaggio',
+    'index.send': 'Invia',
+    'index.name': 'Nome',
+    'index.send-message': 'Invia un messaggio',
   }
 }
 

@@ -10,7 +10,7 @@
 <main class="container mx-auto">
 	<div use:rounded class="edge" />
 	<div use:rounded={{ radius: 30 }} class="edge-1" />
-	<div class="overline">{t('index.overline', $language)}</div>
+	<p class="overline">{t('index.overline', $language)}</p>
 	<h1>Rita Homolya</h1>
 	<Thumbnail />
 	<div class="mask" />
@@ -66,7 +66,7 @@
 	}
 	.dotgrid {
 		@include fill-parent;
-		background-image: url('data:image/svg+xml;utf8,<svg width="8" height="8" xmlns="http://www.w3.org/2000/svg"><path fill="rgba(0,0,0,1)" d="M.5.5h1v1h-1z" fill-rule="evenodd"/></svg>');
+		background-image: url('data:image/svg+xml;utf8,<svg width="8" height="8" xmlns="http://www.w3.org/2000/svg"><path fill="rgba(0,0,0,0.24)" d="M.5.5h1v1h-1z" fill-rule="evenodd"/></svg>');
 		background-repeat: repeat;
 		pointer-events: none;
 		// transform: translateY(-1px);

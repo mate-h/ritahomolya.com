@@ -1,13 +1,16 @@
-<script>
+<script lang="ts">
 	import rounded from '$lib/rounded';
 
+	export let type;
+	export let title;
+	export let disabled: boolean = false;
 	let className;
 	export { className as class };
 
 	function handler() {}
 </script>
 
-<button class={className} on:click={handler}>
+<button {type} {title} class:disabled class={className} on:click={handler}>
 	<div class="root" use:rounded={{ radius: 32 }}>
 		<div class="edge" use:rounded={{ radius: 28 }} />
 		<div class="foreground" />
@@ -21,7 +24,16 @@
 	// hover-dark: 0.08;
 	// focus-dark: 0.24;
 	// pressed-dark: 0.32;
-
+	.disabled {
+		pointer-events: none;
+		cursor: auto;
+		& > .root {
+			background-color: #888888;
+		}
+		& > .root > .edge {
+			background-color: #888888;
+		}
+	}
 	button {
 		transform: translateY(3px);
 		height: 2rem;
@@ -46,6 +58,7 @@
 		height: 100%;
 		position: relative;
 		background-color: #007aff;
+		transition: background-color 75ms linear;
 	}
 	.foreground {
 		@include fill-parent;
@@ -57,6 +70,7 @@
 		margin: 2px;
 		@include fill-parent;
 		background-color: #007aff;
+		transition: background-color 75ms linear;
 	}
 	span {
 		@include typography(subtitle2, 21);
