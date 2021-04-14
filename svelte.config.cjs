@@ -1,6 +1,9 @@
 const sveltePreprocess = require('svelte-preprocess');
 const pkg = require('./package.json');
 const vercel = require('@sveltejs/adapter-vercel');
+if (process.env.NODE_ENV === "development") {
+	require('dotenv').config();
+}
 
 /** @type {import('@sveltejs/kit').Config} */
 module.exports = {

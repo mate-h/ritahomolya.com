@@ -12,7 +12,12 @@
 	function handleSubmit(t: Event) {
 		t.preventDefault();
 		const data = new FormData(t.target as HTMLFormElement);
-		console.log(data.get('message'));
+		let object = {};
+		data.forEach((value, key) => (object[key] = value));
+		fetch('/api/message', {
+			method: 'post',
+			body: JSON.stringify(object)
+		});
 	}
 </script>
 
