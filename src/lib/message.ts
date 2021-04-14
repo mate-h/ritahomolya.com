@@ -6,6 +6,9 @@ const messages = {
     'lang.hu': 'Hungarian',
     'lang.it': 'Italian',
     'index.contact': 'Contact',
+    'index.email': 'Email',
+    'index.phone': 'Phone',
+    'index.message': 'Message',
   },
   hu: {
     'index.overline': 'Grafikai Tervezés • Animáció Készítés',
@@ -13,7 +16,10 @@ const messages = {
     'lang.en': 'Angol',
     'lang.hu': 'Magyar',
     'lang.it': 'Olasz',
-    'index.contact': 'Kapcsolat'
+    'index.contact': 'Kapcsolat',
+    'index.email': 'E-mail',
+    'index.phone': 'Telefon',
+    'index.message': 'Üzenet',
   },
   it: {
     'index.overline': 'Progettazione grafica • Animazioni',
@@ -21,10 +27,12 @@ const messages = {
     'lang.en': 'Inglese',
     'lang.hu': 'Ungherese',
     'lang.it': 'Italiano',
-    'index.contact': 'Contatto'
+    'index.contact': 'Contatto',
+    'index.email': 'Email',
+    'index.phone': 'Telefono',
+    'index.message': 'Messaggio',
   }
 }
-
 
 export type supported = keyof typeof messages;
 export const languages = Object.keys(messages) as supported[];

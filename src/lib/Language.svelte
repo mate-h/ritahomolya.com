@@ -30,10 +30,11 @@
 	];
 </script>
 
-<ul>
+<ul class="flex justify-center">
 	{#each items as { icon, key, lang }, i}
 		<li>
 			<button
+				class="flex justify-center items-center"
 				use:rounded
 				class:selected={$language === lang}
 				on:click={() => handler(lang)}
@@ -47,19 +48,12 @@
 
 <style lang="scss">
 	@import './mixins.scss';
-	ul {
-		display: flex;
-		justify-content: center;
-	}
 	span {
 		position: relative;
 		z-index: 1;
 	}
 	button {
 		transition: background-color 75ms linear;
-		display: flex;
-		align-items: center;
-		justify-content: center;
 		position: relative;
 		width: 2rem;
 		height: 2rem;
