@@ -2,8 +2,9 @@
 	import Button from '$lib/Button.svelte';
 	import Icon from '$lib/Icon.svelte';
 	import { t } from '$lib/message';
-	import { language } from '$lib/stores';
+	import { language, sentMessage } from '$lib/stores';
 	let message = '';
+	let loading = false;
 	function handleInput(t: Event) {
 		const el: any = t.target;
 		el.parentNode.dataset.replicatedValue = this.value;
@@ -11,13 +12,23 @@
 	}
 	function handleSubmit(t: Event) {
 		t.preventDefault();
-		const data = new FormData(t.target as HTMLFormElement);
-		let object = {};
-		data.forEach((value, key) => (object[key] = value));
-		fetch('/api/message', {
-			method: 'post',
-			body: JSON.stringify(object)
-		});
+		if ($sentMessage == null) {
+			const form = t.target as HTMLFormElement;
+			const data = new FormData(form);
+			let object = {};
+			data.forEach((value, key) => (object[key] = value));
+			loading = true;
+			fetch('/api/message', {
+				method: 'post',
+				body: JSON.stringify(object)
+			})
+				.then((r) => r.json())
+				.then((r) => {
+					loading = false;
+					sentMessage.update(() => object);
+					form.reset();
+				});
+		}
 	}
 </script>
 
@@ -27,10 +38,17 @@
 <form class="mx-auto" on:submit={handleSubmit}>
 	<div class="root">
 		<div class="h-6">
-			<input class="h-6" placeholder={t('index.name', $language)} name="name" autocomplete="name" />
+			<input
+				disabled={$sentMessage !== null}
+				class="h-6"
+				placeholder={t('index.name', $language)}
+				name="name"
+				autocomplete="name"
+			/>
 		</div>
 		<div class="h-6 mt-2">
 			<input
+				disabled={$sentMessage !== null}
 				class="h-6"
 				placeholder={t('index.email', $language)}
 				name="email"
@@ -39,7 +57,12 @@
 		</div>
 
 		<div class="grow-wrap mt-2">
-			<textarea name="message" on:input={handleInput} placeholder={t('index.message', $language)} />
+			<textarea
+				disabled={$sentMessage !== null}
+				name="message"
+				on:input={handleInput}
+				placeholder={t('index.message', $language)}
+			/>
 		</div>
 	</div>
 	<div class="flex justify-end mt-2">
@@ -51,9 +74,20 @@
 			<Icon name="phone.fill" />
 			{t('index.phone', $language)}
 		</Button>
-		<Button disabled={message === ''} title={t('index.send', $language)} type="submit">
-			<Icon name="paperplane" />
-			{t('index.send', $language)}
+		<Button
+			{loading}
+			class="relative"
+			disabled={message === '' || $sentMessage !== null}
+			title={t('index.send', $language)}
+			type="submit"
+		>
+			{#if $sentMessage !== null}
+				<Icon name="checkmark" />
+				{t('index.sent', $language)}
+			{:else}
+				<Icon name="paperplane" />
+				{t('index.send', $language)}
+			{/if}
 		</Button>
 	</div>
 </form>

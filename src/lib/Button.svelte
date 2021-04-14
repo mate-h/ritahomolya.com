@@ -1,21 +1,28 @@
 <script lang="ts">
 	import rounded from '$lib/rounded';
+	import Loading from './Loading.svelte';
 
 	export let type;
 	export let title;
 	export let disabled: boolean = false;
+	export let loading: boolean = false;
 	let className;
 	export { className as class };
 
 	function handler() {}
 </script>
 
-<button {type} {title} class:disabled class={className} on:click={handler}>
+<button {disabled} {type} {title} class:disabled class:loading class={className} on:click={handler}>
 	<div class="root" use:rounded={{ radius: 32 }}>
 		<div class="edge" use:rounded={{ radius: 28 }} />
 		<div class="foreground" />
 		<span><slot /></span>
 	</div>
+	{#if loading}
+		<div class="absolute inset-0 flex justify-center items-center">
+			<Loading />
+		</div>
+	{/if}
 </button>
 
 <style lang="scss">
@@ -24,20 +31,31 @@
 	// hover-dark: 0.08;
 	// focus-dark: 0.24;
 	// pressed-dark: 0.32;
-	.disabled {
-		pointer-events: none;
+
+	.disabled,
+	.loading {
 		cursor: auto;
+		pointer-events: none;
 		& > .root {
 			background-color: #888888;
 		}
 		& > .root > .edge {
-			background-color: #888888;
+			background-color: transparent !important;
+		}
+		color: rgba(255, 255, 255, 0.38);
+	}
+	.loading {
+		color: white;
+		& > .root > span {
+			visibility: hidden;
 		}
 	}
+
 	button {
 		transform: translateY(3px);
 		height: 2rem;
 		color: white;
+		position: relative;
 
 		&:focus {
 			outline: none;

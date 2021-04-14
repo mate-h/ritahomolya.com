@@ -24,3 +24,14 @@ if (browser) {
   currentLang = getLanguage(navigator.language);
 }
 export const language = writable<supported>(currentLang);
+
+let sentMessageStored; 
+if (browser) {
+  sentMessageStored = localStorage.getItem("sentMessage");
+}
+export const sentMessage = writable(sentMessageStored ? JSON.parse(sentMessageStored) : null);
+sentMessage.subscribe(value => {
+  if (browser) {
+    localStorage.setItem("sentMessage", JSON.stringify(value));
+  }
+});

@@ -10,6 +10,7 @@ const messages = {
     'index.phone': 'Phone',
     'index.message': 'Message',
     'index.send': 'Send',
+    'index.sent': 'Sent',
     'index.name': 'Name',
     'index.send-message': 'Send a message',
   },
@@ -24,6 +25,7 @@ const messages = {
     'index.phone': 'Telefon',
     'index.message': 'Üzenet',
     'index.send': 'Küldés',
+    'index.sent': 'Elküldve',
     'index.name': 'Név',
     'index.send-message': 'Üzenet küldése',
   },
@@ -38,6 +40,7 @@ const messages = {
     'index.phone': 'Telefono',
     'index.message': 'Messaggio',
     'index.send': 'Invia',
+    'index.sent': 'Inviato',
     'index.name': 'Nome',
     'index.send-message': 'Invia un messaggio',
   }
