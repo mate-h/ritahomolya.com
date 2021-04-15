@@ -5,6 +5,7 @@
 	import { t } from '$lib/message';
 	import { language } from '$lib/stores';
 	import ContactForm from '$lib/ContactForm.svelte';
+	import Projects from '$lib/Projects.svelte';
 </script>
 
 <main class="container mx-auto">
@@ -15,6 +16,7 @@
 	<Thumbnail />
 	<div class="mask" />
 	<ContactForm />
+	<Projects />
 	<footer>
 		<Language />
 		{t('index.footer', $language)}{' — '}
