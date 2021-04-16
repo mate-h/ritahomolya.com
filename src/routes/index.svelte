@@ -1,20 +1,22 @@
 <script lang="ts">
 	import rounded from '$lib/rounded';
-	import Button from '$lib/Button.svelte';
 	import Thumbnail from '$lib/Thumbnail.svelte';
 	import Language from '$lib/Language.svelte';
 	import { t } from '$lib/message';
 	import { language } from '$lib/stores';
+	import ContactForm from '$lib/ContactForm.svelte';
+	import Projects from '$lib/Projects.svelte';
 </script>
 
 <main class="container mx-auto">
 	<div use:rounded class="edge" />
 	<div use:rounded={{ radius: 30 }} class="edge-1" />
-	<div class="overline">{t('index.overline', $language)}</div>
+	<p class="overline">{t('index.overline', $language)}</p>
 	<h1>Rita Homolya</h1>
 	<Thumbnail />
 	<div class="mask" />
-	<Button class="mt-6">{t('index.contact', $language)}</Button>
+	<ContactForm />
+	<Projects />
 	<footer>
 		<Language />
 		{t('index.footer', $language)}{' — '}
@@ -22,6 +24,7 @@
 			>GitHub</a
 		>
 	</footer>
+	<!-- <Dialog /> -->
 	<div class="dotgrid" />
 </main>
 
@@ -36,10 +39,8 @@
 		border-radius: 2px;
 		position: relative;
 		text-align: center;
-		//box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06), 0 1px 2px rgba(0, 0, 0, 0.12);
 		@apply py-8;
 		min-height: calc(100vh + 16rem);
-		//transform: rotate3d(0.5, -0.866, 0, 15deg) rotate(1deg);
 		box-shadow: 2em 4em 6em -2em rgba(0, 0, 0, 0.12), 1em 2em 3.5em -2.5em rgba(0, 0, 0, 0.12);
 		border-radius: 0.5em;
 		margin-top: 1rem;
@@ -58,7 +59,7 @@
 	}
 	.mask {
 		position: absolute;
-		top: calc(279px + 6rem);
+		top: calc(280px + 6rem);
 		bottom: 7px;
 		left: 7px;
 		right: 7px;
@@ -70,7 +71,7 @@
 		background-image: url('data:image/svg+xml;utf8,<svg width="8" height="8" xmlns="http://www.w3.org/2000/svg"><path fill="rgba(0,0,0,0.24)" d="M.5.5h1v1h-1z" fill-rule="evenodd"/></svg>');
 		background-repeat: repeat;
 		pointer-events: none;
-		transform: translateY(-1px);
+		// transform: translateY(-1px);
 		margin: 7px;
 		z-index: 10;
 	}

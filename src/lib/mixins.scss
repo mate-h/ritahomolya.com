@@ -114,8 +114,14 @@ $spec: (
   line-height: get-rem($lh);
   font-size: get-rem($size);
   letter-spacing: #{$tracking / $size}em;
+  font-weight: #{$weight};
+  font-variation-settings: "wght" #{$weight};
+
   @if ($case != "none") {
     text-transform: #{$case};
+    @if ($case == "uppercase") {
+      font-feature-settings: "cpsp";
+    }
   }
 
   &::before {

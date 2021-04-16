@@ -24,8 +24,8 @@
 
 	.root {
 		position: relative;
-		height: 279px;
-		width: 279px;
+		height: 280px;
+		width: 280px;
 		@apply mx-auto;
 		z-index: -1;
 	}
