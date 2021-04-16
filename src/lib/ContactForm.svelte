@@ -5,6 +5,9 @@
 	import { language, sentMessage } from '$lib/stores';
 	let message = '';
 	let loading = false;
+	let addressLink, phoneLink;
+	addressLink = `mailto:process.env.RECIPIENT_ADDRESS`;
+	phoneLink = `tel:process.env.RECIPIENT_PHONE`;
 	function handleInput(t: Event) {
 		const el: any = t.target;
 		el.parentNode.dataset.replicatedValue = this.value;
@@ -29,6 +32,12 @@
 					form.reset();
 				});
 		}
+	}
+	function handleEmail() {
+		window.open(addressLink, '_blank').focus();
+	}
+	function handlePhone() {
+		window.open(phoneLink, '_blank').focus();
 	}
 </script>
 
@@ -66,11 +75,11 @@
 		</div>
 	</div>
 	<div class="flex justify-end mt-2">
-		<Button>
+		<Button on:click={handleEmail} title={addressLink}>
 			<Icon name="envelope" />
 			{t('index.email', $language)}
 		</Button>
-		<Button class="ml-2 mr-auto">
+		<Button on:click={handlePhone} title={phoneLink} class="ml-2 mr-auto">
 			<Icon name="phone.fill" />
 			{t('index.phone', $language)}
 		</Button>

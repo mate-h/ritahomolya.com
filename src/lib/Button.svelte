@@ -8,11 +8,9 @@
 	export let loading: boolean = false;
 	let className;
 	export { className as class };
-
-	function handler() {}
 </script>
 
-<button {disabled} {type} {title} class:disabled class:loading class={className} on:click={handler}>
+<button {disabled} {type} {title} class:disabled class:loading class={className} on:click>
 	<div class="root" use:rounded={{ radius: 32 }}>
 		<div class="edge" use:rounded={{ radius: 28 }} />
 		<div class="foreground" />
