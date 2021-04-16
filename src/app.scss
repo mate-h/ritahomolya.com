@@ -20,9 +20,47 @@
 
 :root {
 	font-family: Inter, system-ui, sans-serif;
+  --displayScale: 1;
+  --pixel: 1px;
 }
 
 code {
   font-family: 'SF Mono', ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
   font-size: .75rem;
+}
+
+@media only screen and (-webkit-min-device-pixel-ratio: 1.5),
+  only screen and (min-device-pixel-ratio: 1.5),
+  only screen and (min-resolution: 1.5dppx) {
+  :root {
+    --displayScale: 2;
+    --pixel: 0.5px;
+  }
+}
+@media only screen and (-webkit-min-device-pixel-ratio: 2.5),
+  only screen and (min-device-pixel-ratio: 2.5),
+  only screen and (min-resolution: 2.5dppx) {
+  :root {
+    --displayScale: 3;
+    --pixel: 0.34px;
+  }
+}
+@media only screen and (-webkit-min-device-pixel-ratio: 3.5),
+  only screen and (min-device-pixel-ratio: 3.5),
+  only screen and (min-resolution: 3.5dppx) {
+  :root {
+    --displayScale: 4;
+    --pixel: 0.25px;
+  }
+}
+
+hr {
+  --color: rgba(0, 0, 0, calc(0.12 * var(--displayScale)));
+  border: none;
+  outline: none;
+  border-bottom: 1px solid var(--color);
+  margin-bottom: -1px;
+  transform: scale(1, calc(1 / var(--displayScale)));
+  padding-top: 2rem;
+  padding-bottom: 2rem;
 }

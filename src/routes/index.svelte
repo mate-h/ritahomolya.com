@@ -18,6 +18,7 @@
 	<ContactForm />
 	<Projects />
 	<footer>
+		<hr class="mx-6 md:mx-8" />
 		<Language />
 		{t('index.footer', $language)}{' — '}
 		<a href="https://github.com/mate-h/ritahomolya.com" target="_blank" rel="noopener noreferrer"
