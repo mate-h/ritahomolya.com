@@ -30,7 +30,7 @@
 	];
 </script>
 
-<ul class="flex justify-center">
+<ul class="flex justify-center mb-2">
 	{#each items as { icon, key, lang }, i}
 		<li>
 			<button
