@@ -65,6 +65,7 @@
 
 	let _window;
 	onMount(() => {
+		refreshLayout();
 		_window = window;
 		_window.addEventListener('resize', refreshLayout, false); /* on resize */
 	});
