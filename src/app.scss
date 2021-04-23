@@ -64,3 +64,7 @@ hr {
   padding-top: 2rem;
   padding-bottom: 2rem;
 }
+
+.dark hr {
+  --color: rgba(255,255,255, calc(0.54 * var(--displayScale)));
+}

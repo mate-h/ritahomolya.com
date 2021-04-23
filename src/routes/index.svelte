@@ -6,11 +6,13 @@
 	import { language } from '$lib/stores';
 	import ContactForm from '$lib/ContactForm.svelte';
 	import Projects from '$lib/Projects.svelte';
+	import Theme from '$lib/Theme.svelte';
 </script>
 
-<main class="container mx-auto">
+<main class="container mx-auto dark:text-white">
 	<div use:rounded class="edge" />
 	<div use:rounded={{ radius: 30 }} class="edge-1" />
+	<Theme />
 	<p class="overline">{t('index.overline', $language)}</p>
 	<h1>Rita Homolya</h1>
 	<Thumbnail />
@@ -32,8 +34,12 @@
 <style lang="scss">
 	@import '../lib/mixins.scss';
 
-	:root {
+	:global(body) {
 		background-color: #fafafa;
+	}
+
+	:global(.dark) {
+		background-color: #424242;
 	}
 
 	main {
@@ -47,16 +53,23 @@
 		margin-top: 1rem;
 		margin-bottom: 4rem;
 	}
+
 	.edge {
 		@include fill-parent;
 		background-color: #e0e0e0;
 		z-index: -1;
+	}
+	:global(.dark) .edge {
+		background-color: rgba(255, 255, 255, 0.54);
 	}
 	.edge-1 {
 		@include fill-parent;
 		@apply bg-white;
 		z-index: -1;
 		margin: 1px;
+	}
+	:global(.dark) .edge-1 {
+		background-color: #2b2b2b;
 	}
 	.mask {
 		position: absolute;
@@ -67,19 +80,29 @@
 		background-color: white;
 		z-index: -1;
 	}
+	:global(.dark) .mask {
+		background-color: #2b2b2b;
+	}
 	.dotgrid {
 		@include fill-parent;
-		background-image: url('data:image/svg+xml;utf8,<svg width="8" height="8" xmlns="http://www.w3.org/2000/svg"><path fill="rgba(0,0,0,0.24)" d="M.5.5h1v1h-1z" fill-rule="evenodd"/></svg>');
+		background-image: url('data:image/svg+xml;utf8,<svg width="8" height="8" xmlns="http://www.w3.org/2000/svg"><path fill="rgba(0, 0, 0, 0.24)" d="M.5.5h1v1h-1z" fill-rule="evenodd"/></svg>');
 		background-repeat: repeat;
 		pointer-events: none;
 		// transform: translateY(-1px);
 		margin: 7px;
 		z-index: 10;
 	}
+	:global(.dark) .dotgrid {
+		background-image: url('data:image/svg+xml;utf8,<svg width="8" height="8" xmlns="http://www.w3.org/2000/svg"><path fill="rgba(255,255,255, 0.38)" d="M.5.5h1v1h-1z" fill-rule="evenodd"/></svg>');
+	}
 
 	.overline {
 		@include typography(overline);
 		color: rgba(0, 0, 0, 0.76);
+	}
+
+	:global(.dark) .overline {
+		color: rgba(255, 255, 255, 0.76);
 	}
 
 	footer {

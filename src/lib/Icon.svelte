@@ -7,7 +7,7 @@
 	export let style = '';
 </script>
 
-<i {style} class={className}>{lookup[name]}</i>
+<i {style} class={className} {...$$restProps}>{lookup[name]}</i>
 
 <style>
 	i {

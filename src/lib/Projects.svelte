@@ -137,11 +137,11 @@
 	.detail {
 		position: relative;
 		text-align: left;
-		color: white;
+		color: black;
 		& > .overlay {
 			overflow: hidden;
 			padding: 1rem;
-			background-color: rgba(0, 0, 0, 0.38);
+			background-color: rgba(255, 255, 255, 0.76);
 			opacity: 0;
 			top: 0;
 			left: 0;
@@ -153,6 +153,12 @@
 		}
 		&:hover > .overlay {
 			opacity: 1;
+		}
+	}
+	:global(.dark) .detail {
+		color: white;
+		& > .overlay {
+			background-color: rgba(0, 0, 0, 0.54);
 		}
 	}
 </style>

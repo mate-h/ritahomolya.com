@@ -57,6 +57,7 @@
 		</div>
 		<div class="h-6 mt-2">
 			<input
+				id="email"
 				disabled={$sentMessage !== null}
 				class="h-6"
 				placeholder={t('index.email', $language)}
@@ -155,6 +156,33 @@
 			--tw-ring-color: rgba(0, 0, 0, 0.16);
 		}
 	}
+
+	:global(.dark) {
+		input,
+		textarea {
+			position: relative;
+			background-color: #2b2b2b;
+			--tw-ring-color: rgb(255, 255, 255, 0.24);
+			--tw-ring-offset-color: #2b2b2b;
+			&:focus {
+				outline: none;
+				--tw-ring-color: #007aff;
+			}
+			&:active {
+				--tw-ring-color: rgba(255, 255, 255, 0.38);
+			}
+		}
+		input:-webkit-autofill,
+		input:-webkit-autofill:hover,
+		input:-webkit-autofill:focus,
+		input:-webkit-autofill:active {
+			-webkit-box-shadow: 0 0 0 30px #2b2b2b inset !important;
+		}
+		input:-webkit-autofill {
+			-webkit-text-fill-color: white !important;
+		}
+	}
+
 	textarea {
 		@apply ring-1;
 		transition: box-shadow 150ms ease;
