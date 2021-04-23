@@ -66,4 +66,7 @@
 			outline: none;
 		}
 	}
+	:global(.dark) button {
+		@include active('dark');
+	}
 </style>

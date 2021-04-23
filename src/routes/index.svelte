@@ -53,6 +53,9 @@
 		margin-top: 1rem;
 		margin-bottom: 4rem;
 	}
+	:global(.dark) main {
+		box-shadow: 2em 4em 6em -2em rgba(0, 0, 0, 0.54), 1em 2em 3.5em -2.5em rgba(0, 0, 0, 0.54);
+	}
 
 	.edge {
 		@include fill-parent;
