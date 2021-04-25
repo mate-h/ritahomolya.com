@@ -1,5 +1,7 @@
 import nodemailer from 'nodemailer';
 import type { RequestHandler } from '@sveltejs/kit';
+import { jsonResponse, textResponse } from '$lib/api';
+import type Mail from 'nodemailer/lib/mailer';
 
 const client = nodemailer.createTransport({
   host: "smtp.sendgrid.net",
@@ -27,10 +29,15 @@ export type ContactForm = {
  * Get the contact request email template
  * 
  * @param data Contact form data
- * @returns contact request email template as a html string
+ * @returns contact request email template
  */
-function contactRequestTemplate(data: ContactForm) {
-  return `${data.name} &lt;<a href="mailto:${data.email}">${data.email}<a>&gt;<br><br>${data.message}`
+function contactRequestTemplate(data: ContactForm): Mail.Options {
+  return {
+    from: config.recipient,
+    to: config.recipient,
+    subject: `Contact request: ${data.name}`,
+    html: `${data.name} &lt;<a href="mailto:${data.email}">${data.email}<a>&gt;<br><br>${data.message}`
+  }
 }
 
 /**
@@ -38,26 +45,6 @@ function contactRequestTemplate(data: ContactForm) {
  */
 export const post: RequestHandler = ({ body }) => {
   const data = JSON.parse(body as string) as ContactForm;
-  return client.sendMail({
-    from: config.recipient,
-    to: config.recipient,
-    subject: 'Contact request: ' + data.name,
-    html: contactRequestTemplate(data)
-  }).then(body => {
-    
-    return {
-      status: 200,
-      headers: {
-        'Content-Type': 'application/json; charset=utf-8'
-      },
-      body: JSON.stringify(body)
-    }
-  }, body => ({
-    status: 500,
-    headers: {
-      'Content-Type': 'text/plain; charset=utf-8'
-    },
-    body: body.toString()
-  }))
-  
+  const template = contactRequestTemplate(data);
+  return client.sendMail(template).then(body => jsonResponse(200, body), body => textResponse(500, body));
 }
