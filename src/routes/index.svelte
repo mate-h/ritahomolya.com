@@ -16,7 +16,6 @@
 	<p class="overline">{t('index.overline', $language)}</p>
 	<h1>Rita Homolya</h1>
 	<Thumbnail />
-	<div class="mask" />
 	<ContactForm />
 	<Projects />
 	<footer>
@@ -74,18 +73,6 @@
 	:global(.dark) .edge-1 {
 		background-color: #2b2b2b;
 	}
-	.mask {
-		position: absolute;
-		top: calc(280px + 6rem);
-		bottom: 7px;
-		left: 7px;
-		right: 7px;
-		background-color: white;
-		z-index: -1;
-	}
-	:global(.dark) .mask {
-		background-color: #2b2b2b;
-	}
 	.dotgrid {
 		@include fill-parent;
 		background-image: url('data:image/svg+xml;utf8,<svg width="8" height="8" xmlns="http://www.w3.org/2000/svg"><path fill="rgba(0, 0, 0, 0.24)" d="M.5.5h1v1h-1z" fill-rule="evenodd"/></svg>');
@@ -96,7 +83,7 @@
 		z-index: 10;
 	}
 	:global(.dark) .dotgrid {
-		background-image: url('data:image/svg+xml;utf8,<svg width="8" height="8" xmlns="http://www.w3.org/2000/svg"><path fill="rgba(255,255,255, 0.38)" d="M.5.5h1v1h-1z" fill-rule="evenodd"/></svg>');
+		background-image: url('data:image/svg+xml;utf8,<svg width="8" height="8" xmlns="http://www.w3.org/2000/svg"><path fill="rgba(255,255,255, 0.24)" d="M.5.5h1v1h-1z" fill-rule="evenodd"/></svg>');
 	}
 
 	.overline {

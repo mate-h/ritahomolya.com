@@ -1,37 +1,36 @@
 <script lang="ts">
+	import { browser } from '$app/env';
 	import Icon from '$lib/Icon.svelte';
 	import { onMount } from 'svelte';
-	let theme = null;
-	onMount(() => {
-		if (localStorage.theme) {
-			theme = localStorage.theme;
-		}
-	});
+	import { theme } from './stores';
+	let on = false;
+	if (browser) {
+		on = ['light', 'dark'].includes(localStorage.getItem('theme'));
+	}
+
 	function handler(t: 'dark' | 'light') {
-		if (localStorage.theme === t) {
-			localStorage.theme = null;
-			theme = null;
+		// remove theme setting
+		if ($theme === t && on) {
+			on = false;
+			localStorage.removeItem('theme');
 			if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
-				document.body.classList.add('dark');
+				theme.set('dark');
 			} else {
-				document.body.classList.remove('dark');
+				theme.set('light');
 			}
 		} else {
+			on = true;
 			localStorage.theme = t;
-			theme = t;
-			if (localStorage.theme === 'dark') {
-				document.body.classList.add('dark');
-			} else {
-				document.body.classList.remove('dark');
-			}
+			theme.set(t);
 		}
 	}
 </script>
 
 <div class="text-center h-6">
 	<span
-		class:theme-dark={theme === 'dark'}
-		class:theme-light={theme === 'light'}
+		class:on
+		class:theme-dark={$theme === 'dark'}
+		class:theme-light={$theme === 'light'}
 		class="toggle-container"
 	>
 		<span on:click={() => handler('dark')} class="toggle-button button-dark">
@@ -54,10 +53,10 @@
 			opacity: 0.38;
 		}
 
-		&.theme-dark .button-dark {
+		&.theme-dark.on .button-dark {
 			opacity: 1;
 		}
-		&.theme-light .button-light {
+		&.theme-light.on .button-light {
 			opacity: 1;
 		}
 	}

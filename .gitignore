@@ -4,5 +4,6 @@ node_modules
 /build
 /functions
 .vercel_build_output
+# Credentials - do not commit
 .env
 gcloud.json

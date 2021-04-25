@@ -1,38 +1,93 @@
-<div class="root">
-	{#each [...new Array(7)] as v, i}
-		<div id={`thumbnail-${6 - i}`} style={`--url: url("/thumbnail-${6 - i}.png")`} />
-	{/each}
+<script lang="ts" context="module">
+	import { GLTFLoader } from 'svelthree';
+	import type { GLTF } from 'svelthree';
+	type Props = { n: string; p: Record<string, unknown> };
+	export class Asset {
+		name: string;
+		props?: Record<string, unknown>;
+		static loader = new GLTFLoader();
+		constructor({ n, p }: Props) {
+			this.name = n;
+			this.props = p;
+		}
+		load() {
+			return new Promise<GLTF>((cb) => {
+				Asset.loader.load(this.name, cb);
+			});
+		}
+	}
+	const a = ({ n, p }: Props) => {
+		return new Asset({ n, p });
+	};
+	const assets = [
+		a({
+			n: '/assets/book.glb',
+			p: { maxDistance: 40, minDistance: 16 }
+		}),
+		a({
+			n: '/assets/gecko.glb',
+			p: { maxDistance: 15, minDistance: 8 }
+		})
+	];
+</script>
+
+<script lang="ts">
+	import { browser } from '$app/env';
+	import rounded from '$lib/rounded';
+	import ViewOptions from './ViewOptions.svelte';
+	import Carousel from './Carousel.svelte';
+
+	let w, h;
+	let rootNode;
+	let Canvas;
+	let style = '';
+	let index = 0;
+	let asset = assets[index];
+	function setIndex(i) {
+		index = i.detail;
+		asset = assets[index];
+	}
+	if (browser) {
+		requestAnimationFrame(() => {
+			const ddpx = window.devicePixelRatio;
+			w = rootNode.clientWidth * ddpx;
+			h = rootNode.clientHeight * ddpx;
+			style = `
+				width: ${rootNode.clientWidth}px; 
+				height: ${rootNode.clientHeight}px;
+				z-index: 20;
+				position: relative;
+			`;
+			import('./Canvas.svelte').then((module) => {
+				Canvas = module.default;
+			});
+		});
+	}
+
+	// let three;
+	// onMount(() => {
+	// 	debugger;
+	// 	import('three').then((three) => {
+	// 		console.log(three);
+	// 	});
+	// });
+</script>
+
+<div bind:this={rootNode} class="root" use:rounded={{ radius: 64 }}>
+	<svelte:component this={Canvas} {w} {h} {style} {asset} />
+	<ViewOptions />
+	<Carousel on:change={setIndex} />
 </div>
 
 <style lang="scss">
-	$perspective: 3;
-	:global(#svelte) {
-		perspective: #{$perspective}px;
-		height: 100vh;
-		overflow-x: hidden;
-		overflow-y: auto;
-	}
-	@for $i from 0 to 6 {
-		$scale: 0.5;
-		$offset: $scale * (6 - $i);
-
-		// higher i => higher up in Y
-		#thumbnail-#{$i} {
-			transform: translateZ(-#{$offset}px) scale(#{1 + ($offset / $perspective)}) translateY(-3vh);
-		}
-	}
-
 	.root {
 		position: relative;
 		height: 280px;
 		width: 280px;
 		@apply mx-auto;
-		z-index: -1;
+		background-color: rgba(0, 0, 0, 0.06);
 	}
-	div:not(.root) {
-		@apply inset-0;
-		position: absolute;
-		background-image: var(--url);
-		background-size: contain;
+	:global(.dark) .root {
+		background-color: rgba(255, 255, 255, 0.12);
 	}
 </style>
