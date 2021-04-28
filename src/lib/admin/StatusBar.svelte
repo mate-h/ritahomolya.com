@@ -1,8 +1,12 @@
 <script lang="ts">
+	import { browser } from '$app/env';
+
+	import Icon from '$lib/Icon.svelte';
 	import Button from './Button.svelte';
 
 	export let session;
 	export let page;
+	export let pinned = false;
 	function clearCookies() {
 		document.cookie.split(';').forEach(function (c) {
 			document.cookie = c
@@ -19,13 +23,25 @@
 			window.location.reload();
 		}
 	}
+	$: {
+		if (browser) {
+			document.getElementById('svelte').style.paddingTop = pinned ? '1.5rem' : '0';
+		}
+	}
+	function pinHandler(e: Event) {
+		pinned = !pinned;
+		document.getElementById('svelte').style.paddingTop = pinned ? '1.5rem' : '0';
+	}
 </script>
 
 {#if session && session.user}
-	<div class="root whitespace-nowrap">
+	<div class:fixed={pinned} class="root whitespace-nowrap">
 		<div class="inner mx-4 md:mx-6">
-			<span class="body2 truncate"
-				>{session.user.email}{' • '}
+			<span class="body2 truncate">
+				<span on:click={pinHandler} class="active">
+					<Icon style="opacity: 0.54" name={pinned ? 'pin.fill' : 'pin.slash.fill'} />
+				</span>
+				{session.user.email}{' • '}
 				{#if page.path.includes('/admin')}
 					<a href="/">Home</a>
 				{:else}
@@ -38,8 +54,8 @@
 				</form>
 			</span>
 		</div>
+		<hr />
 	</div>
-	<hr />
 {/if}
 
 <style lang="scss">
@@ -49,15 +65,18 @@
 	}
 	.root {
 		position: relative;
-		z-index: 1;
+		top: 0;
+		width: 100vw;
+		height: 1.5rem;
+		z-index: 100;
+		.inner {
+			height: 1.5rem;
+		}
 		&::after {
 			position: absolute;
 			z-index: -2;
 			content: '';
-			left: 0;
-			right: 0;
-			top: 0;
-			bottom: 0.75rem;
+			@apply inset-0;
 			background-color: white;
 		}
 
@@ -65,12 +84,14 @@
 			background-color: #2b2b2b;
 		}
 	}
+	.fixed {
+		position: fixed;
+	}
 	:global(.dark) .root {
 		color: white;
 	}
 	hr {
 		padding: 0;
-		transform: translateY(-0.75rem);
 		pointer-events: none;
 		position: relative;
 		z-index: 1;
@@ -87,5 +108,13 @@
 	}
 	.body2 {
 		@include typography(body2);
+	}
+	.active {
+		position: relative;
+		cursor: pointer;
+		@include active('light');
+	}
+	:global(.dark) .active {
+		@include active('dark');
 	}
 </style>
