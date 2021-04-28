@@ -30,3 +30,31 @@ const main = (p: Project): Page => ({
   ]
 })
 export default main;
+
+export const template = {
+  path: '/projects',
+  type: 'view',
+  class: 'page',
+  meta: {
+    title: '${title} | Projects',
+    description: '${description}',
+    image: '${thumbnail}'
+  },
+  content: {
+    date: {
+      type: 'text',
+      typography: 'overline',
+      class: 'text-opacity-54',
+      content: '${date}'
+    },
+    title: {
+      type: 'text',
+      typography: 'headline6',
+      content: '${title}'
+    }
+  }
+};
+// fetch(`/api/templates/${id}`, {
+//   method: 'POST',
+//   body: JSON.stringify(template)
+// });

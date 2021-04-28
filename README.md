@@ -108,3 +108,18 @@ html```
     </main>
   </body>
 </html>
+
+### Example for projects module
+Modules are hierarchical, just like a filesystem  
+All modules inherit from the root module, and data is stored and mutated in stores  
+
+Admin interface: sitemap, api docs, template and content editor
+
+Name: root  
+Datatype: {projects: Project[], user: User}  
+Routes: "/", "/contact"  
+
+Name: project  
+Plural: projects  
+Datatype: {avatar} & Page  
+Routes: "/projects", "/projects/[id]", "/api/projects/[id]"  

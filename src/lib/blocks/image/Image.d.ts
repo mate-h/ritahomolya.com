@@ -1,7 +1,7 @@
 import * as svelte from 'svelte';
 import { SvelteComponentTyped } from "svelte";
 
-export interface ImageBlock extends svelte.JSX.HTMLAttributes<HTMLElementTagNameMap["img"]>  {
+export interface ImageBlock extends svelte.JSX.HTMLAttributes<HTMLElementTagNameMap["img"]> {
   src: string;
   alt: string;
   class?: string;

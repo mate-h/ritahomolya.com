@@ -98,7 +98,7 @@ $spec: (
   )
 );
 
-@mixin typography($variant, $leading: null) {
+@mixin typography($variant, $leading: null, $baseline: true) {
   // get spec
   $weight: map-get(map-get($spec, $variant), "weight");
   $size: map-get(map-get($spec, $variant), "size");
@@ -123,17 +123,18 @@ $spec: (
       font-feature-settings: "cpsp";
     }
   }
+  @if ($baseline) {
+      &::before {
+         display: inline-block;
+         height: get-rem($lh);
+         content: '';
+      }
 
-  &::before {
-    display: inline-block;
-    height: get-rem($lh);
-    content: '';
-  }
-
-  &::after {
-    display: inline-block;
-    vertical-align: -#{get-rem($hl)};
-    content: '';
+      &::after {
+         display: inline-block;
+         vertical-align: -#{get-rem($hl)};
+         content: '';
+      }
   }
 }
 

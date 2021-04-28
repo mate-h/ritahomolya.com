@@ -67,6 +67,9 @@
 	onMount(() => {
 		_window = window;
 		_window.addEventListener('resize', refreshLayout, false); /* on resize */
+		requestAnimationFrame(() => {
+			refreshLayout(); /* initial load */
+		});
 	});
 	onDestroy(() => {
 		if (_window) {

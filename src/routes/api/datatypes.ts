@@ -1,10 +1,9 @@
-import { jsonResponse } from '$lib/api';
+import { jsonResponse } from '$lib/responses';
 import type { RequestHandler } from '@sveltejs/kit';
 import fs from 'fs';
 // import all scoped modules here
-import * as ProjectsModule from './projects/[id]';
-import type SvelteComponentDev from 'svelte';
-
+import * as ProjectsModule from '$lib/admin/projects';
+import blocks from '$lib/blocks';
 
 export type Route = { url: string; params?: string[]; api?: string };
 function recourse(dir: string): string[] {
@@ -54,14 +53,13 @@ export function getPages(): Route[] {
 
 export function getBlocks() {
 	const files = recourse('./src/lib/blocks');
-	return files;
+	return files.map(f=> f.replace('./src/lib/blocks', ''));
 }
 // returns a list of routes as a flattened hierarchy
 export const get: RequestHandler = () => {
 	const pages = getPages();
-	const blocks = getBlocks();
-	const datatypes = [
+	const modules = [
 		ProjectsModule.datatype
 	]
-	return jsonResponse(200, { datatypes, blocks });
+	return jsonResponse(200, { modules, blocks, pages });
 };

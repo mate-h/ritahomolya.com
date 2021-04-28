@@ -1,10 +1,10 @@
-import { jsonResponse } from "$lib/api";
+import { jsonResponse } from "$lib/responses";
 import type { RequestHandler } from "@sveltejs/kit";
-import { firestore } from "./firestore";
+import type { Project } from "$lib/admin/projects";
+import { template } from "$lib/admin/projects";
+import { firestore } from "$lib/firebase";
 
 // scoped imports
-import projectTemplate from "../admin/projects/template";
-import type { Project } from "../admin/projects";
 
 let fillTemplate = function(templateString: string, templateVars: Record<string, unknown>){
 	templateString = templateString.split('{').join('{this.');
@@ -21,7 +21,7 @@ export const get: RequestHandler = async ({ query }) => {
 	const document = firestore.doc(path);
 	const doc = await document.get();
 
-	const page = projectTemplate(doc.data() as Project);
+	const page = template(doc.data() as Project);
 
 	// console.log(doc.data(), page);
 

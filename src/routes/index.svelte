@@ -19,12 +19,13 @@
 	<ContactForm />
 	<Projects />
 	<footer>
-		<hr class="mx-6 md:mx-8" />
+		<hr class="mx-6 md:mx-8 pb-8" />
 		<Language />
 		{t('index.footer', $language)}{' — '}
 		<a href="https://github.com/mate-h/ritahomolya.com" target="_blank" rel="noopener noreferrer"
 			>GitHub</a
 		>
+		{' • '}<a href="/admin">Admin</a>
 	</footer>
 	<!-- <Dialog /> -->
 	<div class="dotgrid" />
@@ -32,14 +33,6 @@
 
 <style lang="scss">
 	@import '../lib/mixins.scss';
-
-	:global(body) {
-		background-color: #fafafa;
-	}
-
-	:global(.dark) {
-		background-color: #424242;
-	}
 
 	main {
 		border-radius: 2px;
@@ -101,10 +94,6 @@
 		bottom: 1rem;
 		left: 0;
 		right: 0;
-		& > a {
-			color: #007aff;
-			text-decoration: underline;
-		}
 	}
 
 	h1 {

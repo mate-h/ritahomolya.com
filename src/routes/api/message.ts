@@ -1,6 +1,6 @@
 import nodemailer from 'nodemailer';
 import type { RequestHandler } from '@sveltejs/kit';
-import { jsonResponse, textResponse } from '$lib/api';
+import { jsonResponse, textResponse } from '$lib/responses';
 import type Mail from 'nodemailer/lib/mailer';
 
 const client = nodemailer.createTransport({

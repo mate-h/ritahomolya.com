@@ -85,7 +85,7 @@
 </script>
 
 <section>
-	<hr class="mx-6 md:mx-8" />
+	<hr class="mx-6 md:mx-8 pb-8" />
 
 	<h1 class="title text-left mx-6 md:mx-8">{t('index.projects.title', $language)}</h1>
 	<h6 class="subtitle text-left mx-6 md:mx-8">{t('index.projects.subtitle', $language)}</h6>

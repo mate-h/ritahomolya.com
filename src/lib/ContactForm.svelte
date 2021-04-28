@@ -3,16 +3,11 @@
 	import Icon from '$lib/Icon.svelte';
 	import { t } from '$lib/message';
 	import { language, sentMessage } from '$lib/stores';
-	let message = '';
+	import Input from './Input.svelte';
 	let loading = false;
 	let addressLink, phoneLink;
 	addressLink = `mailto:process.env.RECIPIENT_ADDRESS`;
 	phoneLink = `tel:process.env.RECIPIENT_PHONE`;
-	function handleInput(t: Event) {
-		const el: any = t.target;
-		el.parentNode.dataset.replicatedValue = this.value;
-		message = this.value;
-	}
 	function handleSubmit(t: Event) {
 		t.preventDefault();
 		if ($sentMessage == null) {
@@ -46,34 +41,32 @@
 </p>
 <form class="mx-auto" on:submit={handleSubmit}>
 	<div class="root">
-		<div class="h-6">
-			<input
-				disabled={$sentMessage !== null}
-				class="h-6"
-				placeholder={t('index.name', $language)}
-				name="name"
-				autocomplete="name"
-			/>
-		</div>
-		<div class="h-6 mt-2">
-			<input
-				id="email"
-				disabled={$sentMessage !== null}
-				class="h-6"
-				placeholder={t('index.email', $language)}
-				name="email"
-				autocomplete="email"
-			/>
-		</div>
-
-		<div class="grow-wrap mt-2">
-			<textarea
-				disabled={$sentMessage !== null}
-				name="message"
-				on:input={handleInput}
-				placeholder={t('index.message', $language)}
-			/>
-		</div>
+		<Input
+			required
+			disabled={$sentMessage !== null}
+			class="h-6"
+			placeholder={t('index.name', $language)}
+			name="name"
+			autocomplete="name"
+		/>
+		<Input
+			required
+			class="mt-2"
+			id="email"
+			disabled={$sentMessage !== null}
+			placeholder={t('index.email', $language)}
+			name="email"
+			type="email"
+			autocomplete="email"
+		/>
+		<Input
+			required
+			class="mt-2"
+			component="textarea"
+			disabled={$sentMessage !== null}
+			name="message"
+			placeholder={t('index.message', $language)}
+		/>
 	</div>
 	<div class="flex justify-end mt-2">
 		<Button on:click={handleEmail} title={addressLink}>
@@ -87,7 +80,7 @@
 		<Button
 			{loading}
 			class="relative"
-			disabled={message === '' || $sentMessage !== null}
+			disabled={$sentMessage !== null}
 			title={t('index.send', $language)}
 			type="submit"
 		>
@@ -114,86 +107,5 @@
 	.root {
 		min-height: 4rem;
 		padding-bottom: 14px;
-	}
-	.grow-wrap {
-		display: grid;
-		&::after {
-			content: attr(data-replicated-value) ' ';
-			white-space: pre-wrap;
-			word-wrap: break-word;
-			visibility: hidden;
-			// overflow: scroll;
-		}
-		& > textarea {
-			resize: none;
-			overflow: hidden;
-		}
-		& > textarea,
-		&::after {
-			@include typography(body2);
-			padding: 7px;
-			border-radius: 2px;
-			width: 272px;
-			grid-area: 1 / 1 / 2 / 2;
-		}
-	}
-	input {
-		@include typography(body2);
-		line-height: normal;
-		width: 100%;
-		border-radius: 2px;
-		transform: translateY(-2px);
-		padding-left: 7px;
-		@apply ring-1;
-		transition: box-shadow 150ms ease;
-		--tw-ring-color: rgb(0, 0, 0, 0.12);
-		&:focus {
-			outline: none;
-			--tw-ring-color: #007aff;
-			--tw-ring-offset-width: 3px;
-		}
-		&:active {
-			--tw-ring-color: rgba(0, 0, 0, 0.16);
-		}
-	}
-
-	:global(.dark) {
-		input,
-		textarea {
-			position: relative;
-			background-color: #2b2b2b;
-			--tw-ring-color: rgb(255, 255, 255, 0.24);
-			--tw-ring-offset-color: #2b2b2b;
-			&:focus {
-				outline: none;
-				--tw-ring-color: #007aff;
-			}
-			&:active {
-				--tw-ring-color: rgba(255, 255, 255, 0.38);
-			}
-		}
-		input:-webkit-autofill,
-		input:-webkit-autofill:hover,
-		input:-webkit-autofill:focus,
-		input:-webkit-autofill:active {
-			-webkit-box-shadow: 0 0 0 30px #2b2b2b inset !important;
-		}
-		input:-webkit-autofill {
-			-webkit-text-fill-color: white !important;
-		}
-	}
-
-	textarea {
-		@apply ring-1;
-		transition: box-shadow 150ms ease;
-		--tw-ring-color: rgb(0, 0, 0, 0.12);
-		&:focus {
-			outline: none;
-			--tw-ring-color: #007aff;
-			--tw-ring-offset-width: 3px;
-		}
-		&:active {
-			--tw-ring-color: rgba(0, 0, 0, 0.16);
-		}
 	}
 </style>
