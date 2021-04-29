@@ -78,8 +78,4 @@ if (browser) {
 }
 export const viewMode = writable<Mode>(mode);
 
-let defaultToken = null;
-if (browser) {
-	defaultToken = localStorage.token;
-}
-export const token = writable<string|null>(defaultToken);
+export const menuOpen = writable<boolean>(true);

@@ -1,8 +1,9 @@
 <script lang="ts">
 	import { browser } from '$app/env';
-
-	import Icon from '$lib/Icon.svelte';
 	import Button from './Button.svelte';
+	import Menu from './Menu.svelte';
+	import Pin from './Pin.svelte';
+	import { menuOpen } from '$lib/stores';
 
 	export let session;
 	export let page;
@@ -23,26 +24,32 @@
 			window.location.reload();
 		}
 	}
+	let adminRoute;
 	$: {
+		adminRoute = page.path.includes('/admin');
 		if (browser) {
 			document.getElementById('svelte').style.paddingTop = pinned ? '1.5rem' : '0';
 		}
 	}
-	function pinHandler(e: Event) {
-		pinned = !pinned;
+	function pinHandler(e: CustomEvent) {
+		pinned = e.detail as boolean;
 		document.getElementById('svelte').style.paddingTop = pinned ? '1.5rem' : '0';
+	}
+	function menuHandler(e: CustomEvent) {
+		menuOpen.set(e.detail as boolean);
 	}
 </script>
 
 {#if session && session.user}
 	<div class:fixed={pinned} class="root whitespace-nowrap">
+		{#if adminRoute}
+			<Menu on:change={menuHandler} top={-0.4375} />
+		{/if}
+		<Pin {pinned} on:change={pinHandler} top={-0.4375} left={2} />
 		<div class="inner mx-4 md:mx-6">
-			<span class="body2 truncate">
-				<span on:click={pinHandler} class="active">
-					<Icon style="opacity: 0.54" name={pinned ? 'pin.fill' : 'pin.slash.fill'} />
-				</span>
+			<span style="padding-left: 2rem" class="body2 truncate">
 				{session.user.email}{' • '}
-				{#if page.path.includes('/admin')}
+				{#if adminRoute}
 					<a href="/">Home</a>
 				{:else}
 					<a href="/admin">Admin</a>
