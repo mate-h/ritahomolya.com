@@ -76,6 +76,7 @@
 	:global(.dark) .img {
 		filter: invert(1);
 		mix-blend-mode: screen;
+		opacity: 0.12;
 	}
 	:global(.dark) .edge-1 {
 		background-color: #2b2b2b;
@@ -90,7 +91,7 @@
 		z-index: 10;
 	}
 	:global(.dark) .dotgrid {
-		background-image: url('data:image/svg+xml;utf8,<svg width="8" height="8" xmlns="http://www.w3.org/2000/svg"><path fill="rgba(255,255,255, 0.24)" d="M.5.5h1v1h-1z" fill-rule="evenodd"/></svg>');
+		background-image: url('data:image/svg+xml;utf8,<svg width="8" height="8" xmlns="http://www.w3.org/2000/svg"><path fill="rgba(255,255,255, 0.12)" d="M.5.5h1v1h-1z" fill-rule="evenodd"/></svg>');
 	}
 
 	.overline {
