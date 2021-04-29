@@ -44,7 +44,7 @@
 		width: 168px;
 	}
 	:global(.dark) nav {
-		background-color: #2b2b2b;
+		background-color: var(--surface);
 	}
 	button {
 		border-radius: 3px;

@@ -108,9 +108,9 @@
 		textarea {
 			caret-color: white;
 			position: relative;
-			background-color: #2b2b2b;
+			background-color: var(--surface);
 			--tw-ring-color: rgba(255, 255, 255, 0.24);
-			--tw-ring-offset-color: #2b2b2b;
+			--tw-ring-offset-color: var(--surface);
 			// border: none;
 			&:focus {
 				outline: none;
@@ -124,7 +124,7 @@
 			&:-webkit-autofill:hover,
 			&:-webkit-autofill:focus,
 			&:-webkit-autofill:active {
-				-webkit-box-shadow: 0 0 0 30px #2b2b2b inset !important;
+				-webkit-box-shadow: 0 0 0 30px var(--surface) inset !important;
 				outline-style: solid;
 				outline-width: 1px;
 				outline-color: rgba(255, 255, 255, 0.24);

@@ -51,12 +51,8 @@
 		color: white;
 	}
 	main {
-		@apply bg-white;
+		background-color: var(--surface);
 		border-radius: 3px;
 		min-height: calc(100vh - 3rem);
-	}
-
-	:global(.dark) main {
-		background-color: #2b2b2b;
 	}
 </style>

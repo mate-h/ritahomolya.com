@@ -76,13 +76,18 @@ hr {
 
 body {
   background-color: #fafafa;
-  // --foreground: white;
+  --backgound: #fafafa;
+  --surface: white;
   
 }
 
 .dark {
-  background-color: #424242;
-  --foregound: #2b2b2b;
+  // background-color: #424242;
+  // --background: #424242;
+  // --surface: #2b2b2b;
+  background-color: #2b2b2b;
+  --background: #2b2b2b;
+  --surface: #222222;
 }
 
 a {

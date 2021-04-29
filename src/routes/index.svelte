@@ -61,7 +61,7 @@
 	}
 	.edge-1 {
 		@include fill-parent;
-		@apply bg-white;
+		background-color: var(--surface);
 		z-index: -1;
 		margin: 1px;
 	}
@@ -77,9 +77,6 @@
 		filter: invert(1);
 		mix-blend-mode: screen;
 		opacity: 0.12;
-	}
-	:global(.dark) .edge-1 {
-		background-color: #2b2b2b;
 	}
 	.dotgrid {
 		@include fill-parent;

@@ -84,11 +84,7 @@
 			z-index: -2;
 			content: '';
 			@apply inset-0;
-			background-color: white;
-		}
-
-		:global(.dark) &::after {
-			background-color: #2b2b2b;
+			background-color: var(--surface);
 		}
 	}
 	.fixed {
