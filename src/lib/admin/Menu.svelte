@@ -1,7 +1,7 @@
 <script lang="ts">
 	import Icon from '$lib/Icon.svelte';
 	import { createEventDispatcher } from 'svelte';
-	export let open = false;
+	export let open = true;
 	export let top = 0.75;
 	export let left = 0.5;
 	const dispatch = createEventDispatcher();

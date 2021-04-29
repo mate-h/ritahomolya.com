@@ -119,7 +119,12 @@ Name: root
 Datatype: {projects: Project[], user: User}  
 Routes: "/", "/contact"  
 
+Name: admin  
+Parent: root  
+Routes: "/admin", "/admin/dashboard", "/admin/templates", "/admin/projects"  
+
 Name: project  
+Parent: root
 Plural: projects  
 Datatype: {avatar} & Page  
 Routes: "/projects", "/projects/[id]", "/api/projects/[id]"  

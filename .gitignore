@@ -7,3 +7,5 @@ node_modules
 # Credentials - do not commit
 .env
 gcloud.json
+.vercel
+firebase.txt

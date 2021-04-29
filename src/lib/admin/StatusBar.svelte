@@ -4,6 +4,7 @@
 	import Menu from './Menu.svelte';
 	import Pin from './Pin.svelte';
 	import { menuOpen } from '$lib/stores';
+	import Icon from '$lib/Icon.svelte';
 
 	export let session;
 	export let page;
@@ -25,8 +26,12 @@
 		}
 	}
 	let adminRoute;
+	let editAction;
+	let editingActions;
 	$: {
 		adminRoute = page.path.includes('/admin');
+		editingActions = page.path.includes('/edit');
+		editAction = page.path.includes('/projects') && !editingActions;
 		if (browser) {
 			document.getElementById('svelte').style.paddingTop = pinned ? '1.5rem' : '0';
 		}
@@ -60,6 +65,40 @@
 					<Button style="transform: translateY(0.375rem)" type="submit">Sign out</Button>
 				</form>
 			</span>
+			{#if editAction}
+				<span class="float-right mr-2">
+					<Button style="transform: translateY(0.375rem)" type="submit">
+						<Icon name="doc.text.fill" />
+						Edit
+					</Button>
+				</span>
+			{/if}
+			{#if editingActions}
+				<span class="float-right mr-2">
+					<Button style="transform: translateY(0.375rem)" type="submit">
+						<Icon name="checkmark" />
+						Done
+					</Button>
+				</span>
+				<span class="float-right mr-2">
+					<Button style="transform: translateY(0.375rem)" type="submit">
+						<Icon name="xmark" />
+						Cancel
+					</Button>
+				</span>
+				<span class="float-right mr-2">
+					<Button style="transform: translateY(0.375rem)" type="submit">
+						<Icon name="arrow.clockwise" />
+						Redo
+					</Button>
+				</span>
+				<span class="float-right mr-2">
+					<Button style="transform: translateY(0.375rem)" type="submit">
+						<Icon name="arrow.counterclockwise" />
+						Undo
+					</Button>
+				</span>
+			{/if}
 		</div>
 		<hr />
 	</div>
