@@ -12,6 +12,7 @@
 <main class="container mx-auto dark:text-white">
 	<div use:rounded class="edge" />
 	<div use:rounded={{ radius: 30 }} class="edge-1" />
+
 	<Theme />
 	<p class="overline">{t('index.overline', $language)}</p>
 	<h1>Rita Homolya</h1>
@@ -28,6 +29,7 @@
 		{' • '}<a href="/admin">Admin</a>
 	</footer>
 	<!-- <Dialog /> -->
+	<div use:rounded={{ radius: 30 }} class="img" />
 	<div class="dotgrid" />
 </main>
 
@@ -62,6 +64,18 @@
 		@apply bg-white;
 		z-index: -1;
 		margin: 1px;
+	}
+	.img {
+		@include fill-parent;
+		background-image: url('/paper.png');
+		background-repeat: repeat;
+		mix-blend-mode: multiply;
+		pointer-events: none;
+		opacity: 0.24;
+	}
+	:global(.dark) .img {
+		filter: invert(1);
+		mix-blend-mode: screen;
 	}
 	:global(.dark) .edge-1 {
 		background-color: #2b2b2b;
